@@ -27,6 +27,12 @@ export function GameProvider({ children }) {
     setIsPlaying(true);
   };
   /**
+   *
+   */
+  const stop = () => {
+    setIsPlaying(false);
+  };
+  /**
    * values to be passed down
    */
   const value = {
@@ -34,6 +40,7 @@ export function GameProvider({ children }) {
     score,
     isPlaying,
     start,
+    stop,
   };
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
@@ -47,5 +54,11 @@ export function useGame() {
 }
 
 function makeBoard(board = Array(NUM_HOLES).fill(false)) {
-  return board;
+  /** choose a random spot to create a mole
+   * react doesn't redisplay changed state, so create a new state and display that instead
+   */
+  const moleLocation = Math.floor(Math.random() * NUM_HOLES);
+  const newBoard = Array(NUM_HOLES).fill(false);
+  newBoard[moleLocation] = true;
+  return newBoard;
 }

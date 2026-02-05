@@ -12,16 +12,20 @@ displays game UI
 import "./index.css";
 import "./game.css";
 import { useGame } from "./GameContext";
+import Welcome from "./Welcome";
 export default function PlayGame() {
   const { board } = useGame();
+  const { stop } = useGame();
   return (
     <section className="game-board">
       <span>
         <p className="score-restart">Score: 0</p>{" "}
-        <button className="score-restart">Restart</button>
+        <button className="score-restart" onClick={stop}>
+          Restart
+        </button>
         <ul className="board">
           {board.map((holeHasMole, id) => (
-            <makeHole key={id} holeHasMole={holeHasMole}></makeHole>
+            <MakeHole key={id} holeHasMole={holeHasMole}></MakeHole>
           ))}
         </ul>
       </span>
@@ -29,9 +33,9 @@ export default function PlayGame() {
   );
 }
 
-function makeHole(holeHasMole) {
-  // if the hole has a mole, give it the class mole
-  if (holeHasMole) return <li className="mole"></li>;
+function MakeHole(holeHasMole) {
+  // if the hole has a mole, give it the class mole and make it clickable
+  if (holeHasMole === true) return <li className="mole"></li>;
   // if not, set class to hole
-  return <li className="hole">.</li>;
+  return <li className="hole">test</li>;
 }
