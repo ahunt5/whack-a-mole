@@ -61,8 +61,14 @@ function makeBoard(board = Array(NUM_HOLES).fill(false)) {
   /** choose a random spot to create a mole
    * react doesn't redisplay changed state, so create a new state and display that instead
    */
-  const moleLocation = Math.floor(Math.random() * NUM_HOLES);
-  const newBoard = board;
+  // creates an array that has the current index of the mole ie its location
+  const newMoleBoard = board.reduce((newMoleBoard, holeHasMole, index) => {
+    if (!holeHasMole) newMoleBoard.push(index);
+    return newMoleBoard;
+  }, []);
+  const moleLocation =
+    newMoleBoard[Math.floor(Math.random() * newMoleBoard.length)];
+  const newBoard = Array(NUM_HOLES).fill(false);
   // set mole location in the new board to random generated position
   newBoard[moleLocation] = true;
 
