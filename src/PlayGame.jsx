@@ -15,10 +15,11 @@ import { useGame } from "./GameContext";
 export default function PlayGame() {
   const { board } = useGame();
   const { stop } = useGame();
+  const { score } = useGame();
   return (
     <section className="game-board">
       <span>
-        <p className="score-restart">Score: 0</p>{" "}
+        <p className="score-restart">Score: {score}</p>{" "}
         <button className="score-restart" onClick={stop}>
           Restart
         </button>
@@ -34,7 +35,13 @@ export default function PlayGame() {
 
 function MakeHole({ holeHasMole }) {
   // if the hole has a mole, give it the class mole and make it clickable
-  if (holeHasMole === true) return <li className="hole mole">a mole</li>;
+  const { whack } = useGame();
+  if (holeHasMole === true)
+    return (
+      <li onClick={whack} className="hole mole">
+        a mole
+      </li>
+    );
   // if not, set class to hole
   return <li className="hole">test</li>;
 }

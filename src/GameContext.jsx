@@ -26,11 +26,14 @@ export function GameProvider({ children }) {
     setScore(0);
     setIsPlaying(true);
   };
-  /**
-   *
-   */
+  // when restart clicked, set IsPlaying to false
   const stop = () => {
     setIsPlaying(false);
+  };
+  // when mole is clicked, add 1 to the score and make a new board
+  const whack = () => {
+    setBoard(makeBoard(board));
+    setScore(score + 1);
   };
   /**
    * values to be passed down
@@ -41,6 +44,7 @@ export function GameProvider({ children }) {
     isPlaying,
     start,
     stop,
+    whack,
   };
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
@@ -58,7 +62,7 @@ function makeBoard(board = Array(NUM_HOLES).fill(false)) {
    * react doesn't redisplay changed state, so create a new state and display that instead
    */
   const moleLocation = Math.floor(Math.random() * NUM_HOLES);
-  const newBoard = Array(NUM_HOLES).fill(false);
+  const newBoard = board;
   // set mole location in the new board to random generated position
   newBoard[moleLocation] = true;
 
