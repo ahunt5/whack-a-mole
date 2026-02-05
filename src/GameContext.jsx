@@ -59,6 +59,8 @@ function makeBoard(board = Array(NUM_HOLES).fill(false)) {
    */
   const moleLocation = Math.floor(Math.random() * NUM_HOLES);
   const newBoard = Array(NUM_HOLES).fill(false);
+  // set mole location in the new board to random generated position
   newBoard[moleLocation] = true;
+
   return newBoard;
 }

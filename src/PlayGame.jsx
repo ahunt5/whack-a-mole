@@ -12,7 +12,6 @@ displays game UI
 import "./index.css";
 import "./game.css";
 import { useGame } from "./GameContext";
-import Welcome from "./Welcome";
 export default function PlayGame() {
   const { board } = useGame();
   const { stop } = useGame();
@@ -25,7 +24,7 @@ export default function PlayGame() {
         </button>
         <ul className="board">
           {board.map((holeHasMole, id) => (
-            <MakeHole key={id} holeHasMole={holeHasMole}></MakeHole>
+            <MakeHole key={id} holeHasMole={holeHasMole} />
           ))}
         </ul>
       </span>
@@ -33,9 +32,9 @@ export default function PlayGame() {
   );
 }
 
-function MakeHole(holeHasMole) {
+function MakeHole({ holeHasMole }) {
   // if the hole has a mole, give it the class mole and make it clickable
-  if (holeHasMole === true) return <li className="mole"></li>;
+  if (holeHasMole === true) return <li className="hole mole">a mole</li>;
   // if not, set class to hole
   return <li className="hole">test</li>;
 }
