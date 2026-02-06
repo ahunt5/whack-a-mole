@@ -1,6 +1,35 @@
-.score-restart {
-  display: inline-block;
+.scoreboard,
+.restart {
+  gap: 10px;
+}
+#score-container,
+.welcome {
+  text-align: center;
+  font-size: large;
 }
 .board {
   list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: rem;
+  padding: 10rem;
+  max-width: 33%;
+  margin: auto;
+}
+.hole,
+.mole {
+  width: 12rem;
+  height: 12rem;
+}
+.mole:hover {
+  cursor: url("/hammer.png"), auto !important;
+}
+.hole {
+  cursor: not-allowed;
+}
+button {
+  height: 100px;
+  width: 150px;
+  font-size: large;
 }

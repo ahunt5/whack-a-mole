@@ -18,17 +18,18 @@ export default function PlayGame() {
   const { score } = useGame();
   return (
     <section className="game-board">
-      <span>
-        <p className="score-restart">Score: {score}</p>{" "}
-        <button className="score-restart" onClick={stop}>
+      <div id="score-container">
+        <h1>Whack A Mole!</h1>
+        <p className="scoreboard">Score: {score}</p>{" "}
+        <button className="restart" onClick={stop}>
           Restart
         </button>
-        <ul className="board">
-          {board.map((holeHasMole, id) => (
-            <MakeHole key={id} holeHasMole={holeHasMole} />
-          ))}
-        </ul>
-      </span>
+      </div>
+      <ul className="board">
+        {board.map((holeHasMole, id) => (
+          <MakeHole key={id} holeHasMole={holeHasMole} />
+        ))}
+      </ul>
     </section>
   );
 }
@@ -37,11 +38,7 @@ function MakeHole({ holeHasMole }) {
   // if the hole has a mole, give it the class mole and make it clickable
   const { whack } = useGame();
   if (holeHasMole === true)
-    return (
-      <li onClick={whack} className="hole mole">
-        a mole
-      </li>
-    );
+    return <li onClick={whack} className="hole mole"></li>;
   // if not, set class to hole
-  return <li className="hole">test</li>;
+  return <li className="hole"></li>;
 }
